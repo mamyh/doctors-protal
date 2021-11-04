@@ -24,7 +24,7 @@ const Banner = () => {
                 <Grid item xs={12} md={6} style={verticalCenter}>
                     <Box>
                         <Typography variant="h3">Your New Smile <br /> Starts here</Typography>
-                        <Typography variant="h6" sx={{ fontSize: 14, fontWeight: 300, color: 'gray' }}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, optio. Est deleniti autem assumenda dicta exercitationem iure facilis saepe quasi ratione, itaque nam deserunt excepturi consectetur adipisci architecto animi obcaecati soluta temporibus nesciunt eum. Amet itaque accusamus alias excepturi cum!</Typography>
+                        <Typography variant="h6" sx={{ my: 4, fontSize: 14, fontWeight: 300, color: 'gray' }}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, optio. Est deleniti autem assumenda dicta exercitationem iure facilis saepe quasi ratione, itaque nam deserunt excepturi consectetur adipisci architecto animi obcaecati soluta temporibus nesciunt eum. Amet itaque accusamus alias excepturi cum!</Typography>
                         <Button variant="contained" sx={{ bgcolor: '#4EF3F5' }}>Get Appointment</Button>
                     </Box>
                 </Grid>

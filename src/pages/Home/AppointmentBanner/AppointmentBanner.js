@@ -32,7 +32,6 @@ const AppointmentBanner = () => {
                     </Typography>
                     <Button variant="contained" sx={{ bgcolor: '#4EF3F5' }}>Learn more</Button>
                 </Grid>
-
             </Grid>
         </Box>
     )
