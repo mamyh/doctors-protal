@@ -3,6 +3,7 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import Appointment from "./pages/Appointments/Appointment/Appointment";
 import Home from "./pages/Home/Home/Home";
 
 
@@ -10,8 +11,8 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/about">
-          <Home />
+        <Route path="/appointment">
+          <Appointment></Appointment>
         </Route>
         <Route path="/home">
           <Home />
