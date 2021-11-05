@@ -37,12 +37,12 @@ const bookings = [{
 const AvailableAppointments = ({ date }) => {
 
     return (
-        <Container>
-            <Typography variant="h4" sx={{ textAlign: 'center', color: '' }}>
+        <Container sx={{ mb: 4 }}>
+            <Typography variant="h4" sx={{ textAlign: 'center', color: 'info.main', fontWeight: 600, my: 6 }}>
                 Availabel Appointments on {date.toDateString()}
             </Typography>
             <Grid container spacing={3}>
-                {bookings.map(booking => <Booking key={booking.id} booking={booking}></Booking>)}
+                {bookings.map(booking => <Booking key={booking.id} date={date} booking={booking}></Booking>)}
             </Grid>
 
         </Container>
