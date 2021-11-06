@@ -7,6 +7,7 @@ import AuthProvider from "./contexts/AuthProvider/AuthProvider";
 import Appointment from "./pages/Appointments/Appointment/Appointment";
 import Home from "./pages/Home/Home/Home";
 import Login from "./pages/Login/Login/Login";
+import PrivateRoute from "./pages/Login/PrivateRoute/PrivateRoute";
 import Register from "./pages/Login/Register/Register";
 
 
@@ -15,9 +16,9 @@ function App() {
     <AuthProvider>
       <Router>
         <Switch>
-          <Route path="/appointment">
+          <PrivateRoute path="/appointment">
             <Appointment></Appointment>
-          </Route>
+          </PrivateRoute>
           <Route path="/home">
             <Home />
           </Route>

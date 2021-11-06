@@ -1,10 +1,17 @@
-import { Button, Container, Grid, TextField, Typography } from '@mui/material'
+import { Alert, Button, CircularProgress, Container, Grid, TextField, Typography } from '@mui/material'
+import { Box } from '@mui/system';
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import login from '../../../images/login.png';
+import { NavLink, useLocation, useHistory } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
+import loginImg from '../../../images/login.png';
 
 const Login = () => {
-    const [loginDate, setLoginDate] = useState({})
+    const [loginDate, setLoginDate] = useState({});
+    const { login, isLoading, user, authError, signInWithGoogle } = useAuth();
+    //for the redirect page 
+    const location = useLocation();
+    const history = useHistory();
+
     const handleOnChange = (e) => {
         const field = e.target.name;
         const value = e.target.value;
@@ -12,9 +19,14 @@ const Login = () => {
         newData[field] = value;
         setLoginDate(newData);
     }
+
+    const handleGoogleSignIn = () => {
+        signInWithGoogle(location, history);
+    }
     const handleLogin = e => {
-        alert('logining')
+
         e.preventDefault();
+        login(loginDate.email, loginDate.password, location, history);
     }
     return (
         <Container>
@@ -29,7 +41,7 @@ const Login = () => {
                             id="standerd-basic"
                             label="Your Email"
                             variant="standard"
-                            onChange={handleOnChange}
+                            onBlur={handleOnChange}
                             name="email"
                         />
                         <TextField
@@ -38,23 +50,32 @@ const Login = () => {
                             label="Your Password"
                             variant="standard"
                             type="password"
-                            onChange={handleOnChange}
+                            onBlur={handleOnChange}
                             name="password"
                         />
 
                         <Button sx={{ width: '75%', m: 1 }} variant="contained" type="submit" >Login</Button>
-                        <NavLink style={{ textDecoration: 'none' }} to="/register">
 
-                            <Button color="inherit">New User ? Please Register</Button>
-                        </NavLink>
                     </form>
+                    <p>-----------------OR-----------------</p>
+                    <Button style={{ display: 'block' }} onClick={handleGoogleSignIn} variant="contained">Sign In With Google</Button>
+                    <NavLink style={{ textDecoration: 'none' }} to="/register">
+
+                        <Button color="inherit">New User ? Please Register</Button>
+                    </NavLink>
+                    {isLoading && <Box sx={{ display: 'flex' }}>
+                        <CircularProgress />
+                    </Box>}
+                    {user?.email && <Alert severity="success"> You are Logged In .</Alert>}
+                    {authError && <Alert severity="error">{authError}</Alert>}
+
                 </Grid>
                 <Grid item xs={12} md={6}>
-                    <img style={{ width: '100%' }} src={login} />
+                    <img style={{ width: '100%' }} src={loginImg} />
                 </Grid>
             </Grid>
         </Container>
     )
 }
 
-export default Login
+export default Login;
