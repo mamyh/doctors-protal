@@ -14,23 +14,40 @@ const style = {
     boxShadow: 24,
     p: 4,
 };
-const BookingModal = ({ openBooking, handleBookingClose, booking, date }) => {
+const BookingModal = ({ openBooking, handleBookingClose, booking, date, isSuccess }) => {
     const { user } = useAuth();
     const { name, time } = booking;
-    const initialInfo = { email: user.email, patientName: user.displayName }
+    const initialInfo = { email: user.email, patientName: user.displayName, phone: '' }
     const [bookingInfo, setbookingInfo] = useState(initialInfo);
+
+
     const handleOnBlur = (e) => {
         const field = e.target.name;
         const value = e.target.value;
         const newInfo = { ...bookingInfo };
-        console.log(field, value, newInfo);
-
+        //console.log(field, value, newInfo);
+        newInfo[field] = value;
+        setbookingInfo(newInfo);
     }
     const handleBook = (e) => {
-        alert('booking ');
-        handleBookingClose();
+        const data = { ...bookingInfo, serviceName: name, appointTime: time, appointDate: date.toLocaleDateString() };
+        console.log(data);
+        fetch('http://localhost:5000/appointments', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(res => res.json()).then(data => {
+            if (data.insertedId) {
+                isSuccess(true);
+                handleBookingClose();
+            }
+        });
+
         e.preventDefault()
     }
+    const { email, patientName, phone } = bookingInfo;
     return (
         <Modal
             aria-labelledby="transition-modal-title"
@@ -62,7 +79,7 @@ const BookingModal = ({ openBooking, handleBookingClose, booking, date }) => {
                             name="patientName"
                             onBlur={handleOnBlur}
 
-                            defaultValue={user.displayName}
+                            defaultValue={patientName}
                             size="small"
                         />
                         <TextField
@@ -70,7 +87,7 @@ const BookingModal = ({ openBooking, handleBookingClose, booking, date }) => {
                             sx={{ width: '90%', m: 1 }}
                             name="email"
                             onBlur={handleOnBlur}
-                            defaultValue={user.email}
+                            defaultValue={email}
                             size="small"
                         />
                         <TextField
@@ -78,7 +95,7 @@ const BookingModal = ({ openBooking, handleBookingClose, booking, date }) => {
                             sx={{ width: '90%', m: 1 }}
                             name="phone"
                             onBlur={handleOnBlur}
-                            defaultValue="your phone"
+                            defaultValue={phone}
                             size="small"
                         />
                         <TextField

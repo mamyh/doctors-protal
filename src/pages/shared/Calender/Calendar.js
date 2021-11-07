@@ -13,7 +13,7 @@ const Calendar = ({ date, setDate }) => {
                 displayStaticWrapperAs="desktop"
 
                 value={date}
-                shouldDisableDate={isWeekend}
+
                 onChange={(newValue) => {
                     setDate(newValue);
                 }}
@@ -23,4 +23,4 @@ const Calendar = ({ date, setDate }) => {
     )
 }
 
-export default Calendar
+export default Calendar;

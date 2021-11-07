@@ -1,3 +1,4 @@
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -5,6 +6,7 @@ import {
 } from "react-router-dom";
 import AuthProvider from "./contexts/AuthProvider/AuthProvider";
 import Appointment from "./pages/Appointments/Appointment/Appointment";
+import DashBoard from "./pages/Dashboard/DashBoard/DashBoard";
 import Home from "./pages/Home/Home/Home";
 import Login from "./pages/Login/Login/Login";
 import PrivateRoute from "./pages/Login/PrivateRoute/PrivateRoute";
@@ -18,6 +20,9 @@ function App() {
         <Switch>
           <PrivateRoute path="/appointment">
             <Appointment></Appointment>
+          </PrivateRoute>
+          <PrivateRoute path="/dashboard">
+            <DashBoard></DashBoard>
           </PrivateRoute>
           <Route path="/home">
             <Home />

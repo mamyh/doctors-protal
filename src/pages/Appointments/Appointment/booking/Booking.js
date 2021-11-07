@@ -3,7 +3,7 @@ import React from 'react'
 import BookingModal from '../../bookingModal/BookingModal';
 
 
-const Booking = ({ booking, date }) => {
+const Booking = ({ booking, date, setIsSuccess }) => {
     const [openBooking, setOpenBooking] = React.useState(false);
     const handleBookingOpen = () => setOpenBooking(true);
     const handleBookingClose = () => setOpenBooking(false);
@@ -24,7 +24,7 @@ const Booking = ({ booking, date }) => {
                     <Button onClick={handleBookingOpen} variant="contained">Book Appointment</Button>
                 </Paper>
             </Grid>
-            <BookingModal booking={booking} date={date} openBooking={openBooking} handleBookingClose={handleBookingClose}></BookingModal>
+            <BookingModal booking={booking} date={date} openBooking={openBooking} isSuccess={setIsSuccess} handleBookingClose={handleBookingClose}></BookingModal>
         </>
     )
 }
