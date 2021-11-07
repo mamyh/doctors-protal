@@ -1,6 +1,6 @@
 import { Backdrop, Button, Fade, Modal, TextField, Typography } from '@mui/material'
 import { Box } from '@mui/system'
-import React from 'react';
+import React, { useState } from 'react';
 import useAuth from '../../../hooks/useAuth';
 
 const style = {
@@ -17,6 +17,15 @@ const style = {
 const BookingModal = ({ openBooking, handleBookingClose, booking, date }) => {
     const { user } = useAuth();
     const { name, time } = booking;
+    const initialInfo = { email: user.email, patientName: user.displayName }
+    const [bookingInfo, setbookingInfo] = useState(initialInfo);
+    const handleOnBlur = (e) => {
+        const field = e.target.name;
+        const value = e.target.value;
+        const newInfo = { ...bookingInfo };
+        console.log(field, value, newInfo);
+
+    }
     const handleBook = (e) => {
         alert('booking ');
         handleBookingClose();
@@ -50,18 +59,25 @@ const BookingModal = ({ openBooking, handleBookingClose, booking, date }) => {
                         <TextField
                             id="outlined-size-small"
                             sx={{ width: '90%', m: 1 }}
+                            name="patientName"
+                            onBlur={handleOnBlur}
+
                             defaultValue={user.displayName}
                             size="small"
                         />
                         <TextField
                             id="outlined-size-small"
                             sx={{ width: '90%', m: 1 }}
+                            name="email"
+                            onBlur={handleOnBlur}
                             defaultValue={user.email}
                             size="small"
                         />
                         <TextField
                             id="outlined-size-small"
                             sx={{ width: '90%', m: 1 }}
+                            name="phone"
+                            onBlur={handleOnBlur}
                             defaultValue="your phone"
                             size="small"
                         />
