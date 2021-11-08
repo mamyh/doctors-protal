@@ -21,6 +21,8 @@ const useFirebase = () => {
                 // const user = userCredential.user;
                 const newUser = { email, displayName: name }
                 setUser(newUser);
+                //send data to the database
+                saveUser(email, name, 'POST');
                 //send name to the firebase 
                 updateProfile(auth.currentUser, {
                     displayName: name
@@ -63,11 +65,23 @@ const useFirebase = () => {
         signInWithPopup(auth, googleProvider).then(result => {
             const destination = location?.state?.from || '/';
             setUser(result.user);
+            saveUser(result.user.email, result.user.displayName, 'PUT');
             history.push(destination);
             setAuthError('')
         }).catch((error) => {
             setAuthError(error.message)
         }).finally(() => setisLoading(false));
+    }
+
+    const saveUser = (email, displayName, method) => {
+        const user = { email, displayName };
+        fetch('', {
+            method: method,
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user);
+        }).then(res => res.json()).then(data => console.log(data));
     }
 
     //observer 
