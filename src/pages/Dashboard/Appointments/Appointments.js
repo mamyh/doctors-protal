@@ -17,13 +17,14 @@ const Appointments = ({ date }) => {
     }, [date]);
     return (
         <div>
-            you have {appointments.length} appointments
+            <h1>you have {appointments.length} appointments</h1>
             <TableContainer component={Paper}>
                 <Table aria-label="Appointments table">
                     <TableHead>
                         <TableRow>
                             <TableCell>Patent Name</TableCell>
                             <TableCell align="right">Schedule</TableCell>
+                            <TableCell align="right">Service</TableCell>
                             <TableCell align="right">Action</TableCell>
 
                         </TableRow>
@@ -38,6 +39,7 @@ const Appointments = ({ date }) => {
                                     {row.patientName}
                                 </TableCell>
                                 <TableCell align="right">{row.appointDate}</TableCell>
+                                <TableCell align="right">{row.serviceName}</TableCell>
                                 <TableCell align="right"></TableCell>
 
                             </TableRow>

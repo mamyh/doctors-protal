@@ -35,7 +35,7 @@ function DashBoard(props) {
         <div>
             <Toolbar />
             <Divider />
-            <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/appointment"> <Button color="inherit">Appointment</Button></NavLink>
+            <NavLink style={{ textDecoration: 'none' }} to="/appointment"> <Button color="inherit">Appointment</Button></NavLink>
             <List>
                 {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
                     <ListItem button key={text}>
@@ -114,16 +114,16 @@ function DashBoard(props) {
                 sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
             >
                 <Toolbar />
-                <Typography paragraph>
+                <div >
                     <Grid container >
-                        <Grid item xs={12} md={6}>
+                        <Grid item xs={12} md={4}>
                             <Calendar date={date} setDate={setDate}></Calendar>
                         </Grid>
-                        <Grid item xs={12} md={6}>
+                        <Grid item xs={12} md={8}>
                             <Appointments date={date}></Appointments>
                         </Grid>
                     </Grid>
-                </Typography>
+                </div>
 
             </Box>
         </Box>
