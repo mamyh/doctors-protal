@@ -8,7 +8,8 @@ initializingApp();
 const useFirebase = () => {
     const [user, setUser] = useState({});
     const [isLoading, setisLoading] = useState(true);
-    const [authError, setAuthError] = useState('')
+    const [authError, setAuthError] = useState('');
+    const [isAdmin, setIsAdmin] = useState(false);
 
     const auth = getAuth();
     const googleProvider = new GoogleAuthProvider();
@@ -83,6 +84,9 @@ const useFirebase = () => {
             body: JSON.stringify(user)
         }).then(res => res.json()).then(data => console.log(data));
     }
+    useEffect(() => {
+
+    }, []);
 
     //observer 
     useEffect(() => {
@@ -100,7 +104,7 @@ const useFirebase = () => {
     }, []);
 
     return {
-        user, registerUser, login, logout, isLoading, authError, signInWithGoogle
+        user, registerUser, login, logout, isLoading, authError, signInWithGoogle, isAdmin
     }
 }
 
