@@ -27,11 +27,13 @@ import { NavLink } from 'react-router-dom';
 import DashboardHome from '../DashboardHome/DashboardHome';
 import MakeAdmin from '../MakeAdmin/MakeAdmin';
 import AddDoctors from '../AddDoctors/AddDoctors';
+import useAuth from '../../../hooks/useAuth';
+import Admin from '../../Login/Admin/Admin';
 
 const drawerWidth = 200;
 
 function DashBoard(props) {
-
+    const { isAdmin } = useAuth();
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
     let { path, url } = useRouteMatch();
@@ -46,8 +48,11 @@ function DashBoard(props) {
             <Divider />
             <NavLink style={{ textDecoration: 'none' }} to="/appointment"> <Button color="inherit">Appointment</Button></NavLink>
             <NavLink style={{ textDecoration: 'none' }} to={`${url}`}> <Button color="inherit">Dashboard</Button></NavLink>
-            <NavLink style={{ textDecoration: 'none' }} to={`${url}/makeAdmin`}> <Button color="inherit">Make Admin</Button></NavLink>
-            <NavLink style={{ textDecoration: 'none' }} to={`${url}/addDoctor`}> <Button color="inherit">Add Doctor</Button></NavLink>
+            {isAdmin && <Box>
+
+                <NavLink style={{ textDecoration: 'none' }} to={`${url}/makeAdmin`}> <Button color="inherit">Make Admin</Button></NavLink>
+                <NavLink style={{ textDecoration: 'none' }} to={`${url}/addDoctor`}> <Button color="inherit">Add Doctor</Button></NavLink>
+            </Box>}
             <List>
                 {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
                     <ListItem button key={text}>
@@ -131,12 +136,12 @@ function DashBoard(props) {
                     <Route exact path={path}>
                         <DashboardHome></DashboardHome>
                     </Route>
-                    <Route path={`${path}/makeAdmin`}>
+                    <Admin path={`${path}/makeAdmin`}>
                         <MakeAdmin />
-                    </Route>
-                    <Route path={`${path}/addDoctor`}>
+                    </Admin>
+                    <Admin path={`${path}/addDoctor`}>
                         <AddDoctors></AddDoctors>
-                    </Route>
+                    </Admin>
                 </Switch>
 
 

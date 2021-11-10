@@ -82,7 +82,7 @@ const useFirebase = () => {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(user)
-        }).then(res => res.json()).then(data => console.log(data));
+        }).then(res => res.json()).then(data => console.log('user has saved in database successfully'));
     }
     useEffect(() => {
         fetch(`http://localhost:5000/users/${user.email}`).then(res => res.json()).then(data => setIsAdmin(data.isAdmin))
@@ -104,7 +104,7 @@ const useFirebase = () => {
     }, []);
 
     return {
-        user, registerUser, login, logout, isLoading, authError, signInWithGoogle, isAdmin
+        user, isLoading, authError, isAdmin, registerUser, login, logout, signInWithGoogle
     }
 }
 
